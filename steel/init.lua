@@ -1,3 +1,4 @@
+dofile(minetest.get_modpath("steel").."/rust.lua")
 
 minetest.register_node("steel:plate_soft", {
 	description = "Soft steel plate",
