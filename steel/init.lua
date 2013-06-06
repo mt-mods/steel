@@ -5,6 +5,7 @@ minetest.register_node("steel:plate_soft", {
 	tile_images = {"steelplatesoft.png"},
 	is_ground_content = true,
 	groups = {cracky=2},
+	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("steel:plate_hard", {
@@ -12,6 +13,7 @@ minetest.register_node("steel:plate_hard", {
 	tile_images = {"steelplatehard.png"},
 	is_ground_content = true,
 	groups = {cracky=1},
+	sounds = default.node_sound_stone_defaults(),
 })
 
 minetest.register_node("steel:plate_rusted", {
@@ -19,6 +21,7 @@ minetest.register_node("steel:plate_rusted", {
 	tile_images = {"steel_rusted.png"},
 	is_ground_content = true,
 	groups = {cracky=1,choppy=1},
+	sounds = default.node_sound_stone_defaults(),
 })
 
 if minetest.registered_nodes["streets:steel_support"] then
