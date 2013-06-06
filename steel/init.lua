@@ -21,15 +21,20 @@ minetest.register_node("steel:plate_rusted", {
 	groups = {cracky=1,choppy=1},
 })
 
-minetest.register_node("steel:strut", {
-	drawtype = "glasslike",
-	description = "Strut",
-	tile_images = {"strut.png"},
-	is_ground_content = true,
-	paramtype= "light",
-	groups = {choppy=1,cracky=1},
-	sounds =  default.node_sound_stone_defaults(),
-})
+if minetest.registered_nodes["streets:steel_support"] then
+	minetest.register_alias("steel:strut","streets:steel_support")
+else
+	minetest.register_node("steel:strut", {
+		drawtype = "glasslike",
+		description = "Strut",
+		tile_images = {"strut.png"},
+		is_ground_content = true,
+		paramtype= "light",
+		groups = {choppy=1,cracky=1},
+		sounds =  default.node_sound_stone_defaults(),
+	})
+	minetest.register_alias("streets:steel_support","steel:strut")
+end
 minetest.register_node("steel:grate_soft", {
 	description = "Soft Steel Grate",
 	drawtype = "fencelike",
@@ -120,14 +125,17 @@ minetest.register_craft({
 	recipe = "steel:grate_soft",
 })
 
-minetest.register_craft({
-	output = 'steel:strut 5',
-	recipe = {
-		{'default:steel_ingot', '', 'default:steel_ingot'},
-		{'', 'default:steel_ingot', ''},
-		{'default:steel_ingot', '', 'default:steel_ingot'},
-	}
-})
+-- only register this craft if streets is not loaded
+if not minetest.registered_nodes["streets:steel_support"] then
+	minetest.register_craft({
+		output = 'steel:strut 5',
+		recipe = {
+			{'default:steel_ingot', '', 'default:steel_ingot'},
+			{'', 'default:steel_ingot', ''},
+			{'default:steel_ingot', '', 'default:steel_ingot'},
+		}
+	})
+end
 
 minetest.register_craft({
 	output = 'steel:roofing 6',
