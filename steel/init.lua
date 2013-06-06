@@ -84,6 +84,21 @@ minetest.register_node("steel:roofing", {
 	groups = {bendy=2,snappy=1,dig_immediate=2},
 })
 
+if homedecor_register_slope and homedecor_register_roof then
+	homedecor_register_slope("steel", "roofing", 
+		"steel:roofing", 
+		{bendy=2,snappy=1,dig_immediate=2}, 
+		{"corrugated_steel.png"}, 
+		"Corrugated steel roofing"
+	)
+	homedecor_register_roof("steel", "roofing", 
+		{bendy=2,snappy=1,dig_immediate=2}, 
+		{"corrugated_steel.png"}, 
+		"Corrugated steel roofing"
+	)
+end
+
+
 	--steel scrap are only used to recover ingots
 
 minetest.register_craftitem("steel:scrap", {
