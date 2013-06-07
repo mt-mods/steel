@@ -1,5 +1,46 @@
 dofile(minetest.get_modpath("steel").."/rust.lua")
 
+if minetest.setting_getbool("creative_mode") and not minetest.get_modpath("unified_inventory") then
+	steel_expect_infinite_stacks = true
+else
+	steel_expect_infinite_stacks = false
+end
+
+function steel_rotate_and_place(itemstack, placer, pointed_thing)
+
+	local node = minetest.env:get_node(pointed_thing.under)
+	if not minetest.registered_nodes[node.name] or not minetest.registered_nodes[node.name].on_rightclick then
+
+		local above = pointed_thing.above
+		local under = pointed_thing.under
+		local pitch = placer:get_look_pitch()
+		local node = minetest.env:get_node(above)
+		local fdir = minetest.env:dir_to_facedir(placer:get_look_dir())
+		local wield_name = itemstack:get_name()
+
+		if node.name ~= "air" then return end
+
+		local iswall = (above.x ~= under.x) or (above.z ~= under.z)
+		local isceiling = (above.x == under.x) and (above.z == under.z) and (pitch > 0)
+
+		if iswall then 
+			local dirs = { 2, 3, 0, 1 }
+			minetest.env:add_node(above, {name = wield_name.."_wall", param2 = dirs[fdir+1] }) -- place wall variant
+		elseif isceiling then
+			minetest.env:add_node(above, {name = wield_name.."_wall", param2 = 19 }) -- place wall variant on ceiling
+		else
+			minetest.env:add_node(above, {name = wield_name }) -- place regular variant
+		end
+
+		if not steel_expect_infinite_stacks then
+			itemstack:take_item()
+			return itemstack
+		end
+	else
+		minetest.registered_nodes[node.name].on_rightclick(pointed_thing.under, node, placer, itemstack)
+	end
+end
+
 minetest.register_node("steel:plate_soft", {
 	description = "Soft steel plate",
 	tile_images = {"steelplatesoft.png"},
@@ -73,18 +114,48 @@ minetest.register_node("steel:grate_hard", {
 minetest.register_node("steel:roofing", {
 	description = "Corrugated steel roofing",
 	drawtype = "raillike",
-	tile_images = {"corrugated_steel.png", "corrugated_steel.png", "corrugated_steel.png", "corrugated_steel.png"},
+	tile_images = {"corrugated_steel.png"},
 	inventory_image = "corrugated_steel.png",
 	wield_image = "corrugated_steel.png",
 	paramtype = "light",
 	is_ground_content = true,
-	walkable = false,
+	walkable = true,
 	selection_box = {
 		type = "fixed",
                 -- but how to specify the dimensions for curved and sideways rails?
                 fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
 	groups = {bendy=2,snappy=1,dig_immediate=2},
+	on_place = function(itemstack, placer, pointed_thing)
+		steel_rotate_and_place(itemstack, placer, pointed_thing)
+		return itemstack
+	end
+})
+
+minetest.register_node("steel:roofing_wall", {
+	description = "Corrugated steel wall",
+	drawtype = "nodebox",
+	tile_images = {"corrugated_steel.png"},
+	inventory_image = "corrugated_steel.png",
+	wield_image = "corrugated_steel.png",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	is_ground_content = true,
+	walkable = true,
+	groups = {bendy=2,snappy=1,dig_immediate=2, not_in_creative_inventory=1},
+	drop = "steel:roofing",
+	on_place = function(itemstack, placer, pointed_thing)
+		steel_rotate_and_place(itemstack, placer, pointed_thing)
+		return itemstack
+	end,
+        node_box = {
+                type = "fixed",
+                fixed = { -0.5, -0.5, -0.48, 0.5, 0.5, -0.48 }
+        },
+        selection_box = {
+                type = "fixed",
+                fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, -0.4 }
+        },
 })
 
 if homedecor_register_slope and homedecor_register_roof then
@@ -100,7 +171,6 @@ if homedecor_register_slope and homedecor_register_roof then
 		"Corrugated steel roofing"
 	)
 end
-
 
 	--steel scrap are only used to recover ingots
 
