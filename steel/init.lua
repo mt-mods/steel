@@ -41,7 +41,7 @@ end
 
 function steel_rotate_and_place(itemstack, placer, pointed_thing)
 
-	local node = minetest.env:get_node(pointed_thing.under)
+	local node = minetest.get_node(pointed_thing.under)
 	if not minetest.registered_nodes[node.name] or not minetest.registered_nodes[node.name].on_rightclick then
 		if steel_node_is_owned(pointed_thing.above, placer) then
 			return itemstack
@@ -49,8 +49,8 @@ function steel_rotate_and_place(itemstack, placer, pointed_thing)
 		local above = pointed_thing.above
 		local under = pointed_thing.under
 		local pitch = placer:get_look_pitch()
-		local node = minetest.env:get_node(above)
-		local fdir = minetest.env:dir_to_facedir(placer:get_look_dir())
+		local node = minetest.get_node(above)
+		local fdir = minetest.dir_to_facedir(placer:get_look_dir())
 		local wield_name = itemstack:get_name()
 
 		if node.name ~= "air" then return end
@@ -60,11 +60,11 @@ function steel_rotate_and_place(itemstack, placer, pointed_thing)
 
 		if iswall then 
 			local dirs = { 2, 3, 0, 1 }
-			minetest.env:add_node(above, {name = wield_name.."_wall", param2 = dirs[fdir+1] }) -- place wall variant
+			minetest.add_node(above, {name = wield_name.."_wall", param2 = dirs[fdir+1] }) -- place wall variant
 		elseif isceiling then
-			minetest.env:add_node(above, {name = wield_name.."_wall", param2 = 19 }) -- place wall variant on ceiling
+			minetest.add_node(above, {name = wield_name.."_wall", param2 = 19 }) -- place wall variant on ceiling
 		else
-			minetest.env:add_node(above, {name = wield_name }) -- place regular variant
+			minetest.add_node(above, {name = wield_name }) -- place regular variant
 		end
 
 		if not steel_expect_infinite_stacks then
