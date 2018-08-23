@@ -356,4 +356,34 @@ minetest.register_craft({
 	}
 })
 
+if minetest.get_modpath("unifieddyes") then
+	-- Colorize default:steel_block
 
+	minetest.register_node("steel:steel_block", {
+		description = "Steel block (colorized)",
+		tiles = {"steel_default_steel_block.png"},
+		paramtype = "light",
+		paramtype2 = "color",
+		is_ground_content = false,
+		palette = "unifieddyes_palette_extended.png",
+		groups = {cracky=1, level=2, ud_param2_colorable=1, not_in_creative_inventory=1},
+		on_construct = unifieddyes.on_construct,
+		sounds = default.node_sound_metal_defaults(),
+	})
+
+	minetest.override_item("default:steelblock", {
+		palette = "unifieddyes_palette_extended.png",
+		groups = {cracky=1, level=2, ud_param2_colorable=1},
+	})
+
+	unifieddyes.register_color_craft({
+		output = "steel:steel_block",
+		palette = "extended",
+		neutral_node = "default:steelblock",
+		type = "shapeless",
+		recipe = {
+			"NEUTRAL_NODE",
+			"MAIN_DYE",
+		}
+	})
+end
