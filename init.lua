@@ -100,8 +100,11 @@ minetest.register_node("steel:plate_rusted", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+local base_tex = "strut.png"
+
 if minetest.registered_nodes["streets:steel_support"] then
 	minetest.register_alias("steel:strut","streets:steel_support")
+	base_tex = "streets_support.png"
 else
 	minetest.register_node("steel:strut", {
 		drawtype = "glasslike",
@@ -114,6 +117,26 @@ else
 	})
 	minetest.register_alias("streets:steel_support","steel:strut")
 end
+
+minetest.register_node("steel:strut_mount", {
+	description = "Strut with mount",
+	drawtype = "mesh",
+	mesh = "steel_cube.obj",
+	tiles = {
+		base_tex,
+		base_tex,
+		base_tex.."^steel_strut_overlay.png",
+		base_tex.."^steel_strut_overlay.png",
+		base_tex.."^steel_strut_overlay.png",
+		base_tex.."^steel_strut_overlay.png",
+	},
+	is_ground_content = true,
+	paramtype= "light",
+	paramtype2 = "wallmounted",
+	groups = {choppy=1,cracky=1},
+	sounds =  default.node_sound_stone_defaults(),
+})
+
 minetest.register_node("steel:grate_soft", {
 	description = "Soft Steel Grate",
 	drawtype = "fencelike",
@@ -266,6 +289,22 @@ minetest.register_craft({
 		{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
 	}
 })
+
+minetest.register_craft({
+	output = 'steel:strut_mount',
+	recipe = {
+		{'steel:strut', 'default:steel_ingot'},
+	}
+})
+
+minetest.register_craft({
+	output = 'steel:strut_mount',
+	recipe = {
+		{'streets:steel_support', 'default:steel_ingot'},
+	}
+})
+
+
 	--remelting recipes
 
 minetest.register_craft({
@@ -316,7 +355,5 @@ minetest.register_craft({
 		{'steel:scrap', 'steel:scrap'},
 	}
 })
-
-
 
 
