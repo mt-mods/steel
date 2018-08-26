@@ -253,9 +253,9 @@ if not minetest.registered_nodes["streets:steel_support"] then
 	minetest.register_craft({
 		output = 'steel:strut 5',
 		recipe = {
-			{'default:steel_ingot', '', 'default:steel_ingot'},
 			{'', 'default:steel_ingot', ''},
-			{'default:steel_ingot', '', 'default:steel_ingot'},
+			{'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot'},
+			{'', 'default:steel_ingot', ''},
 		}
 	})
 end
