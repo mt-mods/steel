@@ -4,7 +4,7 @@ dofile(modpath .. "/nodes.lua")
 dofile(modpath .. "/crafts.lua")
 
 minetest.register_abm({
-    label = "rest steel blocks near water",
+	label = "rest steel blocks near water",
 	nodenames = {"steel:plate_soft"},
 	neighbors = {"group:water"},
 	interval = 50,

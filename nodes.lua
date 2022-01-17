@@ -1,29 +1,29 @@
---item
+-- Item
 minetest.register_craftitem("steel:scrap", {
 	description = "Steel scrap",
 	inventory_image = "steel_scrap.png",
 })
 
---nodes
+-- Nodes
 minetest.register_node("steel:plate_soft", {
 	description = "Soft steel plate",
 	tiles = {"steel_plate_soft.png"},
 	sounds = default and default.node_sound_stone_defaults() or nil,
-    groups = {cracky = 2},
+	groups = {cracky = 2},
 })
 
 minetest.register_node("steel:plate_hard", {
 	description = "Hardened steel plate",
 	tiles = {"steel_plate_hard.png"},
 	sounds = default and default.node_sound_stone_defaults() or nil,
-    groups = {cracky = 1},
+	groups = {cracky = 1},
 })
 
 minetest.register_node("steel:plate_rusted", {
 	description = "Rusted steel plate",
 	tiles = {"steel_plate_rusted.png"},
 	sounds = default and default.node_sound_stone_defaults() or nil,
-    groups = {cracky = 1, choppy = 1},
+	groups = {cracky = 1, choppy = 1},
 })
 
 minetest.register_node("steel:grate_soft", {
@@ -38,7 +38,7 @@ minetest.register_node("steel:grate_soft", {
 		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
 	},
 	sounds = default and default.node_sound_wood_defaults() or nil,
-    groups = {cracky = 2, choppy = 2},
+	groups = {cracky = 2, choppy = 2},
 })
 
 minetest.register_node("steel:grate_hard", {
@@ -53,7 +53,7 @@ minetest.register_node("steel:grate_hard", {
 		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
 	},
 	sounds = default and default.node_sound_wood_defaults() or nil,
-    groups = {cracky = 1, choppy = 1},
+	groups = {cracky = 1, choppy = 1},
 })
 
 minetest.register_node("steel:roofing", {
@@ -66,12 +66,12 @@ minetest.register_node("steel:roofing", {
 	walkable = true,
 	selection_box = {
 		type = "fixed",
-        fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
+		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
 	groups = {bendy = 2, snappy = 1, dig_immediate = 2},
 })
 
---depreciated, kept around for legacy world compat
+-- Depreciated, kept around for legacy world compat
 minetest.register_node("steel:roofing_wall", {
 	description = "Corrugated steel wall",
 	drawtype = "nodebox",
@@ -82,30 +82,30 @@ minetest.register_node("steel:roofing_wall", {
 	paramtype2 = "facedir",
 	walkable = true,
 	drop = "steel:roofing",
-    node_box = {
-        type = "fixed",
-        fixed = { -0.5, -0.5, -0.48, 0.5, 0.5, -0.48 }
-    },
-    selection_box = {
-        type = "fixed",
-        fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, -0.4 }
-    },
+	node_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.48, 0.5, 0.5, -0.48 }
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, -0.4 }
+	},
 	groups = {bendy = 2, snappy = 1, dig_immediate = 2, not_in_creative_inventory = 1},
 })
 
 if minetest.get_modpath("homedecor_roofing") then
-    homedecor_roofing.register_slope("steel", "roofing",
-	    "steel:roofing",
-	    {snappy = 1, dig_immediate = 2},
-	    {"steel_corrugated_steel.png" },
-	    "Corrugated steel roofing"
-    )
+	homedecor_roofing.register_slope("steel", "roofing",
+		"steel:roofing",
+		{snappy = 1, dig_immediate = 2},
+		{"steel_corrugated_steel.png" },
+		"Corrugated steel roofing"
+	)
 
-    homedecor_roofing.register_roof("steel", "roofing",
-        {snappy = 1, dig_immediate = 2},
-	    {"steel_corrugated_steel.png" },
-	    "Corrugated steel roofing"
-    )
+	homedecor_roofing.register_roof("steel", "roofing",
+		{snappy = 1, dig_immediate = 2},
+		{"steel_corrugated_steel.png" },
+		"Corrugated steel roofing"
+	)
 end
 
 local base_tex = "steel_strut.png"
@@ -118,10 +118,10 @@ else
 		drawtype = "glasslike",
 		description = "Strut",
 		tiles = {base_tex},
-        use_texture_alpha = "clip",
+		use_texture_alpha = "clip",
 		paramtype = "light",
 		sounds =  default and default.node_sound_stone_defaults() or nil,
-        groups = {choppy = 1, cracky = 1},
+		groups = {choppy = 1, cracky = 1},
 	})
 	minetest.register_alias("streets:steel_support", "steel:strut")
 end
@@ -138,11 +138,11 @@ minetest.register_node("steel:strut_mount", {
 		base_tex.."^steel_strut_overlay.png",
 		base_tex.."^steel_strut_overlay.png",
 	},
-    use_texture_alpha = "clip",
+	use_texture_alpha = "clip",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sounds = default and default.node_sound_stone_defaults() or nil,
-    groups = {choppy = 1, cracky = 1},
+	groups = {choppy = 1, cracky = 1},
 })
 
 if minetest.get_modpath("unifieddyes") then
@@ -156,7 +156,7 @@ if minetest.get_modpath("unifieddyes") then
 		on_construct = unifieddyes.on_construct,
 		sounds = default and default.node_sound_metal_defaults() or nil,
 		on_dig = unifieddyes.on_dig,
-        groups = {cracky = 1, level = 2, ud_param2_colorable = 1, not_in_creative_inventory = 1},
+		groups = {cracky = 1, level = 2, ud_param2_colorable = 1, not_in_creative_inventory = 1},
 	})
 
 	minetest.override_item("default:steelblock", {
