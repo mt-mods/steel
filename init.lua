@@ -1,6 +1,5 @@
 local modpath = minetest.get_modpath("steel")
 
-dofile(modpath .. "/nightmare.lua")
 dofile(modpath .. "/nodes.lua")
 dofile(modpath .. "/crafts.lua")
 

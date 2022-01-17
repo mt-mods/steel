@@ -56,6 +56,58 @@ minetest.register_node("steel:grate_hard", {
     groups = {cracky = 1, choppy = 1},
 })
 
+minetest.register_node("steel:roofing", {
+	description = "Corrugated steel roofing",
+	drawtype = "raillike",
+	tiles = {"steel_corrugated_steel.png"},
+	inventory_image = "steel_corrugated_steel.png",
+	wield_image = "steel_corrugated_steel.png",
+	paramtype = "light",
+	walkable = true,
+	selection_box = {
+		type = "fixed",
+        fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
+	},
+	groups = {bendy = 2, snappy = 1, dig_immediate = 2},
+})
+
+--depreciated, kept around for legacy world compat
+minetest.register_node("steel:roofing_wall", {
+	description = "Corrugated steel wall",
+	drawtype = "nodebox",
+	tiles = {"steel_corrugated_steel.png"},
+	inventory_image = "steel_corrugated_steel.png",
+	wield_image = "steel_corrugated_steel.png",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	walkable = true,
+	drop = "steel:roofing",
+    node_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.48, 0.5, 0.5, -0.48 }
+    },
+    selection_box = {
+        type = "fixed",
+        fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, -0.4 }
+    },
+	groups = {bendy = 2, snappy = 1, dig_immediate = 2, not_in_creative_inventory = 1},
+})
+
+if minetest.get_modpath("homedecor_roofing") then
+    homedecor_roofing.register_slope("steel", "roofing",
+	    "steel:roofing",
+	    {snappy = 1, dig_immediate = 2},
+	    {"steel_corrugated_steel.png" },
+	    "Corrugated steel roofing"
+    )
+
+    homedecor_roofing.register_roof("steel", "roofing",
+        {snappy = 1, dig_immediate = 2},
+	    {"steel_corrugated_steel.png" },
+	    "Corrugated steel roofing"
+    )
+end
+
 local base_tex = "steel_strut.png"
 
 if minetest.get_modpath("streets") or minetest.get_modpath("steelsupport") then
