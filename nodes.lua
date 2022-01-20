@@ -1,3 +1,6 @@
+local modpath = minetest.get_modpath("steel")
+local sound_api = dofile(modpath .. "/sound_api_core/init.lua")
+
 -- Item
 minetest.register_craftitem("steel:scrap", {
 	description = "Steel scrap",
@@ -8,22 +11,22 @@ minetest.register_craftitem("steel:scrap", {
 minetest.register_node("steel:plate_soft", {
 	description = "Soft steel plate",
 	tiles = {"steel_plate_soft.png"},
-	sounds = default and default.node_sound_stone_defaults() or nil,
-	groups = {cracky = 2},
+	sounds = sound_api.node_sound_stone_defaults(),
+	groups = {cracky = 2, dig_stone = 1},
 })
 
 minetest.register_node("steel:plate_hard", {
 	description = "Hardened steel plate",
 	tiles = {"steel_plate_hard.png"},
-	sounds = default and default.node_sound_stone_defaults() or nil,
-	groups = {cracky = 1},
+	sounds = sound_api.node_sound_stone_defaults(),
+	groups = {cracky = 1, dig_stone = 1},
 })
 
 minetest.register_node("steel:plate_rusted", {
 	description = "Rusted steel plate",
 	tiles = {"steel_plate_rusted.png"},
-	sounds = default and default.node_sound_stone_defaults() or nil,
-	groups = {cracky = 1, choppy = 1},
+	sounds = sound_api.node_sound_stone_defaults(),
+	groups = {cracky = 1, choppy = 1, dig_stone = 1},
 })
 
 minetest.register_node("steel:grate_soft", {
@@ -37,8 +40,8 @@ minetest.register_node("steel:grate_soft", {
 		type = "fixed",
 		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
 	},
-	sounds = default and default.node_sound_wood_defaults() or nil,
-	groups = {cracky = 2, choppy = 2},
+	sounds = sound_api.node_sound_wood_defaults(),
+	groups = {cracky = 2, choppy = 2, dig_stone = 1},
 })
 
 minetest.register_node("steel:grate_hard", {
@@ -52,8 +55,8 @@ minetest.register_node("steel:grate_hard", {
 		type = "fixed",
 		fixed = {-1/7, -1/2, -1/7, 1/7, 1/2, 1/7},
 	},
-	sounds = default and default.node_sound_wood_defaults() or nil,
-	groups = {cracky = 1, choppy = 1},
+	sounds = sound_api.node_sound_wood_defaults(),
+	groups = {cracky = 1, choppy = 1, dig_stone = 1},
 })
 
 minetest.register_node("steel:roofing", {
@@ -68,7 +71,7 @@ minetest.register_node("steel:roofing", {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
-	groups = {bendy = 2, snappy = 1, dig_immediate = 2},
+	groups = {bendy = 2, snappy = 1, dig_immediate = 2, dig_generic = 1},
 })
 
 -- Depreciated, kept around for legacy world compat
@@ -90,7 +93,7 @@ minetest.register_node("steel:roofing_wall", {
 		type = "fixed",
 		fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, -0.4 }
 	},
-	groups = {bendy = 2, snappy = 1, dig_immediate = 2, not_in_creative_inventory = 1},
+	groups = {bendy = 2, snappy = 1, dig_immediate = 2, not_in_creative_inventory = 1, dig_generic = 1},
 })
 
 if minetest.get_modpath("homedecor_roofing") then
@@ -120,8 +123,8 @@ else
 		tiles = {base_tex},
 		use_texture_alpha = "clip",
 		paramtype = "light",
-		sounds =  default and default.node_sound_stone_defaults() or nil,
-		groups = {choppy = 1, cracky = 1},
+		sounds =  sound_api.node_sound_stone_defaults(),
+		groups = {choppy = 1, cracky = 1, dig_stone = 1},
 	})
 	minetest.register_alias("streets:steel_support", "steel:strut")
 end
@@ -141,11 +144,11 @@ minetest.register_node("steel:strut_mount", {
 	use_texture_alpha = "clip",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
-	sounds = default and default.node_sound_stone_defaults() or nil,
-	groups = {choppy = 1, cracky = 1},
+	sounds = sound_api.node_sound_stone_defaults(),
+	groups = {choppy = 1, cracky = 1, dig_stone = 1},
 })
 
-if minetest.get_modpath("unifieddyes") then
+if minetest.get_modpath("unifieddyes") and minetest.get_modpath("default") then
 	minetest.register_node("steel:steel_block", {
 		description = "Steel block (colorized)",
 		tiles = {"steel_default_steel_block.png"},
@@ -154,7 +157,7 @@ if minetest.get_modpath("unifieddyes") then
 		is_ground_content = false,
 		palette = "unifieddyes_palette_extended.png",
 		on_construct = unifieddyes.on_construct,
-		sounds = default and default.node_sound_metal_defaults() or nil,
+		sounds = sound_api.node_sound_metal_defaults(),
 		on_dig = unifieddyes.on_dig,
 		groups = {cracky = 1, level = 2, ud_param2_colorable = 1, not_in_creative_inventory = 1},
 	})
