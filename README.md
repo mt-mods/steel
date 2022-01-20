@@ -21,12 +21,12 @@ there are a few optional ones to support sounds as well as others for additional
 ## Supported Games:
 
 * Minetest Game - 100% - complete
-* Farlands Reloaded - 90% - missing crafts
-* Mineclone2 - 90% - mising crafts
-* Mineclone5 - 90% - mising crafts
-* Mineclonia - 90% - mising crafts
-* Exile - 10% - everything but sounds
-* Ksurvive - 10% - everything but sounds
+* Farlands Reloaded - 100% - complete
+* Mineclone2 - 100% - complete
+* Mineclone5 - 100% - complete
+* Mineclonia - 100% - complete
+* Exile - 10% - missing everything but sounds
+* Ksurvive - 10% - missing everything but sounds
 
 ## License:
 

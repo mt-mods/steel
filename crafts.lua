@@ -1,3 +1,11 @@
+local steel_item = "default:steel_ingot"
+
+if minetest.get_modpath("mcl_core") then
+	steel_item = "mcl_core:iron_ingot"
+elseif minetest.get_modpath("fl_ores") then
+	steel_item = "fl_ores:iron_ingot"
+end
+
 minetest.register_craft({
 	type = "cooking",
 	output = "steel:plate_hard",
@@ -44,32 +52,32 @@ if minetest.get_modpath("default") then
 	minetest.register_craft({
 		output = "steel:plate_soft 2",
 		recipe = {
-			{"default:steel_ingot", "default:steel_ingot"},
-			{"default:steel_ingot", "default:steel_ingot"},
+			{steel_item, steel_item},
+			{steel_item, steel_item},
 		}
 	})
 
 	minetest.register_craft({
 		output = "steel:grate_soft 3",
 		recipe = {
-			{"default:steel_ingot", "", "default:steel_ingot"},
-			{"default:steel_ingot", "", "default:steel_ingot"},
+			{steel_item, "", steel_item},
+			{steel_item, "", steel_item},
 		}
 	})
 
 	minetest.register_craft({
 		output = "steel:roofing 6",
-		recipe = {{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"}}
+		recipe = {{steel_item, steel_item, steel_item}}
 	})
 
 	minetest.register_craft({
 		output = "steel:strut_mount",
-		recipe = {{"steel:strut", "default:steel_ingot"}}
+		recipe = {{"steel:strut", steel_item}}
 	})
 
 	minetest.register_craft({
 		output = "steel:strut_mount",
-		recipe = {{"streets:steel_support", "default:steel_ingot"}}
+		recipe = {{"streets:steel_support", steel_item}}
 	})
 
 	minetest.register_craft({
@@ -82,9 +90,9 @@ if not minetest.get_modpath("streets") or not minetest.get_modpath("steelsupport
 	minetest.register_craft({
 		output = "steel:strut 5",
 		recipe = {
-			{"", "default:steel_ingot", ""},
-			{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
-			{"", "default:steel_ingot", ""},
+			{"", steel_item, ""},
+			{steel_item, steel_item, steel_item},
+			{"", steel_item, ""},
 		}
 	})
 end
