@@ -1,5 +1,4 @@
-local modpath = minetest.get_modpath("steel")
-local sound_api = dofile(modpath .. "/sound_api_core/init.lua")
+local sound_api = xcompat.sounds
 
 -- Item
 minetest.register_craftitem("steel:scrap", {

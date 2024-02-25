@@ -7,26 +7,17 @@ scrap into an iron lump.  Registered items: plate_hard, plate_soft,
 plate_rusted, grate_hard, grate_soft, strut, roofing.
 
 ## Install Guide
-This mod uses submodules(for the sounds library) so after cloning,
-move into the directory and do `git submodule init && git submodule update`
+clone the repo or install from contentdb
 
 ## Dependencies:
 
-This mod mod current has no hard dependecies.
+required depends
+* xcompat: allows this mod to be game agnostic
+
 there are a few optional ones to support sounds as well as others for additional content
 * homedecor_roofing: adds additional slopes for steel sheeting
 * default + unifieddyes: makes the default steel block dyable
 * streets: allows the mod to register a node in the streets mod if not present and keep compat both ways
-  
-## Supported Games:
-
-* Minetest Game - 100% - complete
-* Farlands Reloaded - 100% - complete
-* Mineclone2 - 100% - complete
-* Mineclone5 - 100% - complete
-* Mineclonia - 100% - complete
-* Exile - 10% - missing everything but sounds
-* Ksurvive - 10% - missing everything but sounds
 
 ## License:
 

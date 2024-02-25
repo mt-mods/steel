@@ -4,5 +4,5 @@ globals = {
 }
 
 read_globals = {
-    "default", "unifieddyes", "homedecor_roofing",
+    "default", "unifieddyes", "homedecor_roofing", "xcompat",
 }

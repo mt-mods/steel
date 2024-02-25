@@ -1,10 +1,4 @@
-local steel_item = "default:steel_ingot"
-
-if minetest.get_modpath("mcl_core") then
-	steel_item = "mcl_core:iron_ingot"
-elseif minetest.get_modpath("fl_ores") then
-	steel_item = "fl_ores:iron_ingot"
-end
+local steel_item = xcompat.materials.steel_ingot
 
 minetest.register_craft({
 	type = "cooking",
