@@ -12,6 +12,7 @@ minetest.register_node("steel:plate_soft", {
 	tiles = {"steel_plate_soft.png"},
 	sounds = sound_api.node_sound_stone_defaults(),
 	groups = {cracky = 2, dig_stone = 1},
+	is_ground_content = false,
 })
 
 minetest.register_node("steel:plate_hard", {
@@ -19,6 +20,7 @@ minetest.register_node("steel:plate_hard", {
 	tiles = {"steel_plate_hard.png"},
 	sounds = sound_api.node_sound_stone_defaults(),
 	groups = {cracky = 1, dig_stone = 1},
+	is_ground_content = false,
 })
 
 minetest.register_node("steel:plate_rusted", {
@@ -26,6 +28,7 @@ minetest.register_node("steel:plate_rusted", {
 	tiles = {"steel_plate_rusted.png"},
 	sounds = sound_api.node_sound_stone_defaults(),
 	groups = {cracky = 1, choppy = 1, dig_stone = 1},
+	is_ground_content = false,
 })
 
 minetest.register_node("steel:grate_soft", {
@@ -41,6 +44,7 @@ minetest.register_node("steel:grate_soft", {
 	},
 	sounds = sound_api.node_sound_wood_defaults(),
 	groups = {cracky = 2, choppy = 2, dig_stone = 1},
+	is_ground_content = false,
 })
 
 minetest.register_node("steel:grate_hard", {
@@ -56,6 +60,7 @@ minetest.register_node("steel:grate_hard", {
 	},
 	sounds = sound_api.node_sound_wood_defaults(),
 	groups = {cracky = 1, choppy = 1, dig_stone = 1},
+	is_ground_content = false,
 })
 
 minetest.register_node("steel:roofing", {
@@ -71,6 +76,7 @@ minetest.register_node("steel:roofing", {
 		fixed = {-1/2, -1/2, -1/2, 1/2, -1/2+1/16, 1/2},
 	},
 	groups = {bendy = 2, snappy = 1, dig_immediate = 2, dig_generic = 1},
+	is_ground_content = false,
 })
 
 -- Depreciated, kept around for legacy world compat
@@ -93,6 +99,7 @@ minetest.register_node("steel:roofing_wall", {
 		fixed = { -0.5, -0.5, -0.5, 0.5, 0.5, -0.4 }
 	},
 	groups = {bendy = 2, snappy = 1, dig_immediate = 2, not_in_creative_inventory = 1, dig_generic = 1},
+	is_ground_content = false,
 })
 
 if minetest.get_modpath("homedecor_roofing") then
@@ -124,6 +131,7 @@ else
 		paramtype = "light",
 		sounds =  sound_api.node_sound_stone_defaults(),
 		groups = {choppy = 1, cracky = 1, dig_stone = 1},
+		is_ground_content = false,
 	})
 	minetest.register_alias("streets:steel_support", "steel:strut")
 end
@@ -145,6 +153,7 @@ minetest.register_node("steel:strut_mount", {
 	paramtype2 = "wallmounted",
 	sounds = sound_api.node_sound_stone_defaults(),
 	groups = {choppy = 1, cracky = 1, dig_stone = 1},
+	is_ground_content = false,
 })
 
 if minetest.get_modpath("unifieddyes") and minetest.get_modpath("default") then
