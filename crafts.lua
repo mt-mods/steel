@@ -1,4 +1,5 @@
 local steel_item = xcompat.materials.steel_ingot
+local recycle = core.get_modpath("technic") and "technic:wrought_iron_dust" or xcompat.materials.iron_lump
 
 minetest.register_craft({
 	type = "cooking",
@@ -75,7 +76,7 @@ if minetest.get_modpath("default") then
 	})
 
 	minetest.register_craft({
-		output = "default:iron_lump",
+		output = recycle,
 		recipe = {{"steel:scrap", "steel:scrap"}}
 	})
 end
